@@ -7,6 +7,8 @@ export interface RegisterData {
   email: string;
   password: string;
   confirmPassword: string;
+  textContent: string;
+  continueButton: string;
 }
 
 export class RegisterPage {
@@ -18,6 +20,8 @@ export class RegisterPage {
   readonly passwordInput: Locator;
   readonly confirmPasswordInput: Locator;
   readonly registerButton: Locator;
+  readonly textContent: Locator;
+  readonly continueButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -31,6 +35,8 @@ export class RegisterPage {
     this.passwordInput = page.locator(locators.passwordInput);
     this.confirmPasswordInput = page.locator(locators.confirmPasswordInput);
     this.registerButton = page.locator(locators.registerButton);
+    this.textContent = page.locator(locators.textContent);
+    this.continueButton = page.locator(locators.continueButton);
   }
 
   async gotoRegisterPage() {
@@ -53,5 +59,8 @@ export class RegisterPage {
     await this.confirmPasswordInput.fill(confirmPassword);
     await expect(this.registerButton).toBeEnabled();
     await this.registerButton.click();
+    await expect(this.textContent).toContainText("Your registration completed");
+    await expect(this.continueButton).toBeVisible();
+    await this.continueButton.click();
   }
 }

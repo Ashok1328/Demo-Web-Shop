@@ -15,3 +15,13 @@ export class RegisterTestData {
     this.confirmPassword = "Password123!";
   }
 }
+
+export class LoginTestData {
+  email: string;
+  password: string;
+
+  constructor() {
+    this.email = "beast22@gmail.com";
+    this.password = "beast22@";
+  }
+}
