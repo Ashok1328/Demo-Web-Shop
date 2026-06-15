@@ -17,11 +17,36 @@ export class RegisterTestData {
 }
 
 export class LoginTestData {
-  email: string;
-  password: string;
+  valid: { email: string; password: string };
+  invalidEmail: { email: string; password: string };
+  invalidPassword: { email: string; password: string };
+  invalidEmailAndPassword: { email: string; password: string };
+  emptyFields: { email: string; password: string };
 
   constructor() {
-    this.email = "beast22@gmail.com";
-    this.password = "beast22@";
+    this.valid = {
+      email: "Batasey22@gmail.com",
+      password: "Beast22@#",
+    };
+
+    this.invalidEmail = {
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+    };
+
+    this.invalidPassword = {
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+    };
+
+    this.invalidEmailAndPassword = {
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+    };
+
+    this.emptyFields = {
+      email: "",
+      password: "",
+    };
   }
 }

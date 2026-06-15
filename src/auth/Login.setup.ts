@@ -4,7 +4,7 @@ import { LoginTestData } from "../data/TestData";
 
 test("Authenticated User Setup", async ({ page }) => {
   const loginPage = new LoginPage(page);
-  const loginData = new LoginTestData();
+  const loginData = new LoginTestData().valid;
 
   await page.goto("/login");
 
