@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { RegisterTestData } from "../data/TestData";
 import { RegisterPage } from "../page/RegisterPage";
+import { RegisterPageLocators } from "../selector/Locators";
 
 test.describe("Register Page", () => {
   test("should allow user to register successfully", async ({ page }) => {
@@ -17,6 +18,6 @@ test.describe("Register Page", () => {
     await registerPage.register(data);
 
     // Verify a success message or result is visible
-    await expect(page.locator(".result")).toBeVisible();
+    await page.locator(new RegisterPageLocators().account).isVisible();
   });
 });
