@@ -25,9 +25,13 @@ export class LoginPage {
   }
 
   async login(data: LoginData) {
+    await expect(this.emailInput).toBeVisible();
     await this.emailInput.fill(data.email);
+    await expect(this.passwordInput).toBeVisible();
     await this.passwordInput.fill(data.password);
+    await expect(this.rememberMeCheckbox).toBeVisible();
     await this.rememberMeCheckbox.check({ force: true });
+    await expect(this.loginButton).toBeEnabled();
     await this.loginButton.click();
   }
 }

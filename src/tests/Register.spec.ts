@@ -7,6 +7,7 @@ test.describe("Register Page", () => {
   test("should allow user to register successfully", async ({ page }) => {
     const registerPage = new RegisterPage(page);
     await registerPage.gotoRegisterPage();
+
     await expect(page).toHaveURL(/register/);
   });
 
