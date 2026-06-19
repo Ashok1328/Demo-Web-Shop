@@ -18,3 +18,11 @@ export class LoginPageLocators {
   loginButton = "//input[@value='Log in']";
   errorMessage = "//div[@class='validation-summary-errors']/ul/li";
 }
+
+export class ProductPageLocators {
+  productList = "//div[@class='item-box']/div/div/h2/a";
+  notificationBar = "//div[@id='bar-notification']";
+  addToCartButton = "//input[@id='add-to-cart-button-31']";
+  shoppingCartLink = "//span[normalize-space()='Shopping cart']";
+  cartItemCount = "//td[@class='product']";
+}

@@ -50,3 +50,24 @@ export class LoginTestData {
     };
   }
 }
+
+export class ProductTestData {
+  electronics: { cellPhones: string[] };
+  books: string;
+  computers: { desktops: string[] };
+  jewelry: string;
+
+  constructor() {
+    this.electronics = {
+      cellPhones: ["Smartphone", "Phone Cover"],
+    };
+    this.computers = {
+      desktops: [
+        "Build your own cheap computer",
+        "Build your own expensive computer",
+      ],
+    };
+    this.jewelry = "Black & White Diamond Heart";
+    this.books = "Computing and Internet";
+  }
+}
