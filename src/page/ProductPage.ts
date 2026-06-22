@@ -12,7 +12,7 @@ export class ProductPage {
   constructor(page: Page) {
     this.page = page;
 
-    const locators = new ProductPageLocators();
+    const locators = ProductPageLocators;
 
     this.productList = page.locator(locators.productList);
     this.addToCartButton = page.locator(locators.addToCartButton);
@@ -21,6 +21,22 @@ export class ProductPage {
     this.cartItemCount = page.locator(locators.cartItemCount);
   }
 
+  /**
+   * Click a category in the top nav (e.g: "Electronics", "Computers", "Books", "Jewelry")
+   * and waits for the category's product list to load
+   * @param category
+   */
+
+  async navigateToCategory(category: string) {
+    await this.page.click(`text=${category}`);
+    await this.productList.first().waitFor({ state: "visible" });
+  }
+
+  /**
+   * Find a product by its visible name in the current list,  click into its
+   * detail page , adds it to cart, and wait for the confirmation notification
+   * @param productName
+   */
   async addProductToCart(productName: string) {
     const count = await this.productList.count();
     for (let i = 0; i < count; i++) {
@@ -35,6 +51,54 @@ export class ProductPage {
     await this.addToCartButton.waitFor({ state: "visible" });
     await this.addToCartButton.click();
     await this.notificationBar.waitFor({ state: "visible" });
+  }
+
+  /**
+   * Adds a single product to a cart . Call navigateToCategory first
+   * so the product is actually present in the list
+   *
+   */
+
+  async addSingleProduct(productName: string) {
+    await this.addProductToCart(productName);
+  }
+
+  /**
+   * Adds multiple product to the cart from the same listing page
+   * Since adding a product navigates into all details page, this goes
+   * back to the listing after each add before picking the next one
+   */
+
+  async addMutlipleProducts(productNames: string[]) {
+    for (const name of productNames) {
+      await this.addProductToCart(name);
+      await this.page.goBack();
+      await this.productList.first().waitFor({ state: "visible" });
+    }
+  }
+
+  /**
+   * Add product across multiple categories in one call. Each entry can be
+   * either a single product name or an array of names for that category,
+   *
+   * Example
+   * await productPage.addProductFromDifferentCategories([
+   * {category: 'electronics' , names: 'SmartPhone'},
+   * {category: 'Computers', names: ["Build ....", "Own ......."]}
+   * ])
+   */
+
+  async addProductsFromDifferentCategories(
+    items: { category: string; names: string | string[] }[],
+  ) {
+    for (const item of items) {
+      await this.navigateToCategory(item.category);
+      if (Array.isArray(item.names)) {
+        await this.addMutlipleProducts(item.names);
+      } else {
+        await this.addSingleProduct(item.names);
+      }
+    }
   }
 
   async goToShoppingCart() {

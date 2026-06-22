@@ -19,6 +19,6 @@ test.describe("Register Page", () => {
     await registerPage.register(data);
 
     // Verify a success message or result is visible
-    await page.locator(new RegisterPageLocators().account).isVisible();
+    await page.locator(RegisterPageLocators.account).isVisible();
   });
 });

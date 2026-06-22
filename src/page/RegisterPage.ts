@@ -26,7 +26,7 @@ export class RegisterPage {
   constructor(page: Page) {
     this.page = page;
 
-    const locators = new RegisterPageLocators();
+    const locators = RegisterPageLocators;
 
     this.genderButton = page.locator(locators.genderButton);
     this.firstNameInput = page.locator(locators.firstNameInput);

@@ -25,7 +25,7 @@ test.describe("User Login", () => {
 
     await loginPage.login(loginData);
 
-    await page.locator(new LoginPageLocators().errorMessage).isVisible();
+    await page.locator(LoginPageLocators.errorMessage).isVisible();
   });
 
   test("Login with invalid password", async ({ page }) => {
@@ -34,7 +34,7 @@ test.describe("User Login", () => {
 
     await loginPage.login(loginData);
 
-    await page.locator(new LoginPageLocators().errorMessage).isVisible();
+    await page.locator(LoginPageLocators.errorMessage).isVisible();
   });
 
   test("Login with invalid credentials", async ({ page }) => {
@@ -43,7 +43,7 @@ test.describe("User Login", () => {
 
     await loginPage.login(loginData);
 
-    await page.locator(new LoginPageLocators().errorMessage).isVisible();
+    await page.locator(LoginPageLocators.errorMessage).isVisible();
   });
 
   test("Login with empty fields", async ({ page }) => {
@@ -52,6 +52,6 @@ test.describe("User Login", () => {
 
     await loginPage.login(loginData);
 
-    await page.locator(new LoginPageLocators().errorMessage).isVisible();
+    await page.locator(LoginPageLocators.errorMessage).isVisible();
   });
 });

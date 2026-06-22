@@ -52,22 +52,41 @@ export class LoginTestData {
 }
 
 export class ProductTestData {
-  electronics: { cellPhones: string[] };
+  electronics: { cellPhones: string[]; single: string; multiple: string[] };
   books: string;
-  computers: { desktops: string[] };
+  computers: { desktops: string[]; single: string; multiple: string[] };
   jewelry: string;
 
   constructor() {
     this.electronics = {
       cellPhones: ["Smartphone", "Phone Cover"],
+      single: "Smartphone",
+      multiple: ["Smartphone", "Phone Cover"],
     };
     this.computers = {
       desktops: [
         "Build your own cheap computer",
         "Build your own expensive computer",
       ],
+      single: "Build your own cheap computer",
+      multiple: [
+        "Build your own cheap computer",
+        "Build your own expensive computer",
+      ],
     };
     this.jewelry = "Black & White Diamond Heart";
     this.books = "Computing and Internet";
+  }
+
+  getProducts(
+    category: "electronics" | "computers",
+    mode: "single" | "multiple",
+  ) {
+    if (category === "electronics") {
+      return mode === "single"
+        ? this.electronics.single
+        : this.electronics.multiple;
+    }
+    return mode === "single" ? this.computers.single : this.computers.multiple;
   }
 }

@@ -16,7 +16,7 @@ export class LoginPage {
   constructor(page: Page) {
     this.page = page;
 
-    const locators = new LoginPageLocators();
+    const locators = LoginPageLocators;
 
     this.emailInput = page.locator(locators.emailInput);
     this.passwordInput = page.locator(locators.passwordInput);
