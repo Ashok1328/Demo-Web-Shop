@@ -52,18 +52,30 @@ export class LoginTestData {
 }
 
 export class ProductTestData {
-  electronics: { cellPhones: string[]; single: string; multiple: string[] };
+  electronics: {
+    subCategory: string;
+    cellPhones: string[];
+    single: string;
+    multiple: string[];
+  };
   books: string;
-  computers: { desktops: string[]; single: string; multiple: string[] };
+  computers: {
+    subCategory: string;
+    desktops: string[];
+    single: string;
+    multiple: string[];
+  };
   jewelry: string;
 
   constructor() {
     this.electronics = {
+      subCategory: "Cell Phones",
       cellPhones: ["Smartphone", "Phone Cover"],
       single: "Smartphone",
       multiple: ["Smartphone", "Phone Cover"],
     };
     this.computers = {
+      subCategory: "Desktops",
       desktops: [
         "Build your own cheap computer",
         "Build your own expensive computer",

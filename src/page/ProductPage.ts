@@ -33,6 +33,16 @@ export class ProductPage {
   }
 
   /**
+   * Clicks into a sub-category from within a category page
+   * Call this after navigateToCategory if the category has sub categories
+   */
+
+  async navigateToSubCategory(subCategory: string) {
+    await this.page.click(`text=${subCategory}`);
+    await this.productList.first().waitFor({ state: "visible" });
+  }
+
+  /**
    * Find a product by its visible name in the current list,  click into its
    * detail page , adds it to cart, and wait for the confirmation notification
    * @param productName
@@ -89,10 +99,20 @@ export class ProductPage {
    */
 
   async addProductsFromDifferentCategories(
-    items: { category: string; names: string | string[] }[],
+    items: {
+      category: string;
+      subCategory?: string;
+      names: string | string[];
+    }[],
   ) {
     for (const item of items) {
       await this.navigateToCategory(item.category);
+
+      // if the category has subcategories, drill into the right one first
+      if (item.subCategory) {
+        await this.navigateToSubCategory(item.subCategory);
+      }
+
       if (Array.isArray(item.names)) {
         await this.addMutlipleProducts(item.names);
       } else {

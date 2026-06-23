@@ -1,21 +1,30 @@
 import { test, expect } from "@playwright/test";
-import { ProductTestData } from "../data/TestData";
+import { LoginTestData, ProductTestData } from "../data/TestData";
 import { ProductPage } from "../page/ProductPage";
+import { LoginPage } from "../page/LoginPage";
 
 test.describe("Add products - single and multiple", () => {
   let productPage: ProductPage;
   let productData: ProductTestData;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/login");
+
+    const loginPage = new LoginPage(page);
+    const creds = new LoginTestData().valid;
+
+    await loginPage.login(creds);
+    await page.waitForURL("/");
 
     productPage = new ProductPage(page);
     productData = new ProductTestData();
   });
 
-  test("should add a single product from Electronics", async () => {
+  test("should add a single product from Electronics > cell phones", async () => {
     await productPage.navigateToCategory("Electronics");
+    await productPage.navigateToCategory(productData.electronics.subCategory);
     await productPage.addSingleProduct(productData.electronics.single);
+
     await expect(productPage.notificationBar).toBeVisible();
   });
 
@@ -41,8 +50,16 @@ test.describe("Add products - single and multiple", () => {
 
   test("should add products spanning categories, mixing single and multiple", async () => {
     await productPage.addProductsFromDifferentCategories([
-      { category: "Electronics", names: productData.electronics.single },
-      { category: "Computers", names: productData.computers.multiple },
+      {
+        category: "Electronics",
+        subCategory: productData.electronics.subCategory,
+        names: productData.electronics.single,
+      },
+      {
+        category: "Computers",
+        subCategory: productData.electronics.subCategory,
+        names: productData.computers.multiple,
+      },
       { category: "Books", names: productData.books },
     ]);
     const epxectedCount = 1 + productData.computers.multiple.length + 1;
