@@ -12,7 +12,7 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./src/tests",
+  testDir: "./src",
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -53,6 +53,7 @@ export default defineConfig({
     {
       name: "chromium-auth",
       dependencies: ["setup"],
+      testMatch: /.*\.spec\.ts/,
       use: {
         browserName: "chromium",
         storageState: "src/auth/auth.json",
@@ -62,6 +63,7 @@ export default defineConfig({
     //Unauthenticated (Login Page test)
     {
       name: "chromium-unauth",
+      testMatch: /.*\.spec.ts/,
       use: {
         browserName: "chromium",
         storageState: undefined,

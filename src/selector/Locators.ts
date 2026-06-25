@@ -22,7 +22,7 @@ export const LoginPageLocators = {
 export const ProductPageLocators = {
   productList: ".item-box h2 a",
   notificationBar: "#bar-notification",
-  addToCartButton: "//input[@id='add-to-cart-button-31']",
+  addToCartButton: "#add-to-cart-button-43",
   shoppingCartLink: "//span[normalize-space()='Shopping cart']",
   cartItemCount: "//td[@class='product']",
 };

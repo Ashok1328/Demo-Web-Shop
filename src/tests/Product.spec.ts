@@ -30,6 +30,7 @@ test.describe("Add products - single and multiple", () => {
 
   test("should add multiple product from Computers", async () => {
     await productPage.navigateToCategory("Computers");
+    await productPage.navigateToSubCategory(productData.computers.subCategory);
     await productPage.addMutlipleProducts(productData.computers.multiple);
 
     await productPage.goToShoppingCart();
