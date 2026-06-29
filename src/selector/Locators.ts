@@ -7,7 +7,7 @@ export const RegisterPageLocators = {
   confirmPasswordInput: "#ConfirmPassword",
   registerButton: "#register-button",
   textContent: ".result",
-  continueButton: "//input[value='Continue']",
+  continueButton: "input[value='Continue']",
   account: "(//div[@class='header']//ul//li/a)[1]",
 };
 
@@ -22,7 +22,7 @@ export const LoginPageLocators = {
 export const ProductPageLocators = {
   productList: ".item-box h2 a",
   notificationBar: "#bar-notification",
-  addToCartButton: "#add-to-cart-button-43",
+  addToCartButton: "input.add-to-cart-button",
   shoppingCartLink: "//span[normalize-space()='Shopping cart']",
   cartItemCount: "//td[@class='product']",
 };

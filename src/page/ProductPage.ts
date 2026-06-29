@@ -80,10 +80,13 @@ export class ProductPage {
    */
 
   async addMutlipleProducts(productNames: string[]) {
-    for (const name of productNames) {
+    for (let i = 0; i < productNames.length; i++) {
+      const name = productNames[i];
       await this.addProductToCart(name);
-      await this.page.goBack();
-      await this.productList.first().waitFor({ state: "visible" });
+      if (i < productNames.length - 1) {
+        await this.page.goBack();
+        await this.productList.first().waitFor({ state: "visible" });
+      }
     }
   }
 
