@@ -27,7 +27,6 @@ test.describe("Add products - single and multiple", () => {
     await productPage.addMutlipleProducts(productData.computers.multiple);
 
     await expect(productPage.notificationBar).toBeVisible();
-    await productPage.goToShoppingCart();
   });
 
   test("should add single product from Books and Jewelry", async () => {
