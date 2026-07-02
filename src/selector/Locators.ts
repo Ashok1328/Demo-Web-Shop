@@ -23,6 +23,22 @@ export const ProductPageLocators = {
   productList: ".item-box h2 a",
   notificationBar: "#bar-notification",
   addToCartButton: "input.add-to-cart-button",
-  shoppingCartLink: "//span[normalize-space()='Shopping cart']",
-  cartItemCount: "//td[@class='product']",
 };
+
+export const CartPageLocators = {
+  shoppingCartLink: "//span[normalize-space()='Shopping cart']",
+  productName: "a.product-name",
+  quantity: "input.qty-input",
+  updateCartButton: "input[name='updatecart']",
+  country: "#CountryId",
+  stateProvince: "#StateProvinceId",
+  zipCode: "#ZipPostalCode",
+  estimateShipping: "input[name='estimateshipping']",
+  subTotal: 'tr:has-text("Sub-Total:") td.cart-total-right span.product-price',
+  shippingTotal: 'tr:has-text("Shipping:") td.cart-total-right span.product-price',
+  taxTotal: 'tr:has-text("Tax:") td.cart-total-right span.product-price',
+  orderTotal: 'tr:has-text("Total:") td.cart-total-right span.product-price.order-total',
+  termsOfServiceCheckbox: "#termsofservice",
+  checkoutButton: "#checkout",
+  emptyCartMessage: ".no-data",
+};  

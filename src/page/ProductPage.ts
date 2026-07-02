@@ -5,9 +5,7 @@ export class ProductPage {
   readonly page: Page;
   readonly productList: Locator;
   readonly addToCartButton: Locator;
-  readonly shoppingCartLink: Locator;
   readonly notificationBar: Locator;
-  readonly cartItemCount: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -16,9 +14,7 @@ export class ProductPage {
 
     this.productList = page.locator(locators.productList);
     this.addToCartButton = page.locator(locators.addToCartButton);
-    this.shoppingCartLink = page.locator(locators.shoppingCartLink);
     this.notificationBar = page.locator(locators.notificationBar);
-    this.cartItemCount = page.locator(locators.cartItemCount);
   }
 
   /**
@@ -122,9 +118,5 @@ export class ProductPage {
         await this.addSingleProduct(item.names);
       }
     }
-  }
-
-  async goToShoppingCart() {
-    await this.shoppingCartLink.click();
   }
 }
