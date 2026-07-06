@@ -1,0 +1,4 @@
+User was already logged in. Logging out to start test clean.
+E2E Checkout Successful! Order Number: 
+                    Order number: 2343081
+                

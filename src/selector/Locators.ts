@@ -41,4 +41,34 @@ export const CartPageLocators = {
   termsOfServiceCheckbox: "#termsofservice",
   checkoutButton: "#checkout",
   emptyCartMessage: ".no-data",
-};  
+};
+
+export const CheckoutPageLocators = {
+  onePageCheckoutLink: "//button[@id='checkout']",
+  billingAddressSelect: "#billing-address-select",
+  billingAddressFirstName: "#BillingNewAddress_FirstName",
+  billingAddressLastName: "#BillingNewAddress_LastName",
+  billingAddressEmail: "#BillingNewAddress_Email",
+  billingAddressCountry: "#BillingNewAddress_CountryId",
+  billingAddressStateProvince: "#BillingNewAddress_StateProvinceId",
+  billingAddressCity: "#BillingNewAddress_City",
+  billingAddressAddress1: "#BillingNewAddress_Address1",
+  billingAddressZipPostalCode: "#BillingNewAddress_ZipPostalCode",
+  billingAddressPhoneNumber: "#BillingNewAddress_PhoneNumber",
+  billingAddressContinueButton: "//div[@id='billing-new-address-step']//button[contains(@class, 'button-next')]",
+  shippingAddressContinueButton: "//div[@id='shipping-address-step']//button[contains(@class, 'button-next')]",
+  billingAddressContinue: "input[onclick='Billing.save()'], button[onclick='Billing.save()'], .billing-next-step-button",
+  shippingAddressContinue: "input[onclick='Shipping.save()'], button[onclick='Shipping.save()'], .shipping-next-step-button",
+  shippingMethodContinue: "input[onclick='ShippingMethod.save()'], button[onclick='ShippingMethod.save()'], .shipping-method-next-step-button",
+  paymentMethodContinue: "input[onclick='PaymentMethod.save()'], button[onclick='PaymentMethod.save()'], .payment-method-next-step-button",
+  paymentInfoContinue: "input[onclick='PaymentInfo.save()'], button[onclick='PaymentInfo.save()'], .payment-info-next-step-button",
+  confirmOrderButton: "input[onclick='ConfirmOrder.save()'], button[onclick='ConfirmOrder.save()'], .confirm-order-next-step-button, input[value='Confirm']",
+  orderConfirmTitle: "h1:has-text('Thank you')",
+  orderNumber: ".order-completed .details li:first-child, div.order-number strong, .order-number strong",
+  orderSuccessMessage: ".section.order-completed .title strong, div.section.order-completed div.title strong"
+};
+
+export const LogoutPageLocators = {
+  logoutLink: "a.ico-logout",
+  loginLink: "a.ico-login",
+};

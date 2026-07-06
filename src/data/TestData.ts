@@ -102,3 +102,57 @@ export class ProductTestData {
     return mode === "single" ? this.computers.single : this.computers.multiple;
   }
 }
+
+export class CheckoutTestData {
+  billingAddress: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    country: string;
+    stateProvince: string;
+    city: string;
+    address1: string;
+    zipPostalCode: string;
+    phoneNumber: string;
+  };
+  shippingAddress: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    country: string;
+    stateProvince: string;
+    city: string;
+    address1: string;
+    zipPostalCode: string;
+    phoneNumber: string;
+  };
+  shippingMethod: string;
+  paymentMethod: string;
+
+  constructor() {
+    this.billingAddress = {
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      email: faker.internet.email(),
+      country: "United States",
+      stateProvince: "California",
+      city: "Los Angeles",
+      address1: faker.location.streetAddress(),
+      zipPostalCode: "90210",
+      phoneNumber: faker.phone.number(),
+    };
+    this.shippingAddress = {
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      email: faker.internet.email(),
+      country: "United States",
+      stateProvince: "California",
+      city: "Los Angeles",
+      address1: faker.location.streetAddress(),
+      zipPostalCode: "90210",
+      phoneNumber: faker.phone.number(),
+    };
+    this.shippingMethod = "Next Day Air";
+    this.paymentMethod = "Credit Card";
+  }
+} 
