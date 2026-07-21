@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { ProductPage } from "../page/ProductPage";
 import { CartPage } from "../page/CartPage";
-import { ProductTestData } from "../data/TestData";
+import { LoginPage } from "../page/LoginPage";
+import { LoginTestData, ProductTestData } from "../data/TestData";
 
 test.describe("Shopping Cart Verification", () => {
   let productPage: ProductPage;
@@ -14,6 +15,18 @@ test.describe("Shopping Cart Verification", () => {
     productData = new ProductTestData();
     
     await page.goto("/");
+
+    // Ensure the user is logged in
+    const logoutLink = page.locator("a.ico-logout");
+    if (!(await logoutLink.isVisible())) {
+      const loginPage = new LoginPage(page);
+      const loginData = new LoginTestData().valid;
+      await page.goto("/login");
+      await loginPage.login(loginData);
+      await logoutLink.waitFor({ state: "visible" });
+      await page.goto("/");
+    }
+
     await cartPage.clearCart();
     await page.goto("/");
   });

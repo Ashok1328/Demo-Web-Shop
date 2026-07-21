@@ -31,6 +31,7 @@ test.describe("Checkout Verification", () => {
       const loginData = new LoginTestData().valid;
       await page.goto("/login");
       await loginPage.login(loginData);
+      await logoutLink.waitFor({ state: "visible" });
       await page.goto("/");
     }
 

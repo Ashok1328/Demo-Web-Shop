@@ -40,11 +40,10 @@ export const CartPageLocators = {
   orderTotal: 'tr:has-text("Total:") td.cart-total-right span.product-price.order-total',
   termsOfServiceCheckbox: "#termsofservice",
   checkoutButton: "#checkout",
-  emptyCartMessage: ".no-data",
+  emptyCartMessage: "div.order-summary-content:has-text('Your Shopping Cart is empty!'), .no-data",
 };
 
 export const CheckoutPageLocators = {
-  onePageCheckoutLink: "//button[@id='checkout']",
   billingAddressSelect: "#billing-address-select",
   billingAddressFirstName: "#BillingNewAddress_FirstName",
   billingAddressLastName: "#BillingNewAddress_LastName",
@@ -71,4 +70,4 @@ export const CheckoutPageLocators = {
 export const LogoutPageLocators = {
   logoutLink: "a.ico-logout",
   loginLink: "a.ico-login",
-};
+};

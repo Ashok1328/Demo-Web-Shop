@@ -61,8 +61,9 @@ export class CheckoutPage {
     }
 
     async fillBillingAddress(billingAddress: any) {
-        // Wait for the billing step to load and either selector to become visible
-        await this.page.waitForSelector('#billing-address-select, #BillingNewAddress_FirstName', { state: 'visible', timeout: 10000 });
+        // Wait for billing step to be active and load
+        await this.page.waitForSelector('li#opc-billing.active', { state: 'visible', timeout: 15000 });
+        await this.page.waitForSelector('#billing-address-select, #BillingNewAddress_FirstName', { state: 'visible', timeout: 15000 });
 
         if (await this.billingAddressSelect.isVisible()) {
             // A saved address is present and selected by default. Just click continue.
@@ -84,41 +85,52 @@ export class CheckoutPage {
     }
 
     async fillShippingAddress(shippingAddress: any) {
-        // If Shipping Method continue button is already visible, the Shipping Address step was skipped
-        if (await this.shippingMethodContinue.isVisible()) {
-            return;
-        }
-        // If not skipped, click continue on shipping address if visible
-        try {
-            await this.shippingAddressContinue.waitFor({ state: "visible", timeout: 2000 });
+        // Wait for either the shipping address step OR the shipping method step to become active
+        await this.page.waitForSelector('li#opc-shipping.active, li#opc-shipping_method.active', { state: 'visible', timeout: 15000 });
+
+        if (await this.page.locator('li#opc-shipping.active').isVisible()) {
             await this.shippingAddressContinue.click();
-        } catch (e) {
-            console.log("Shipping address continue button not visible/skipped.");
         }
     }
 
     async selectShippingMethod(shippingMethod: string) {
+        // Wait for shipping method step to be active
+        await this.page.waitForSelector('li#opc-shipping_method.active', { state: 'visible', timeout: 15000 });
+        // Wait for shipping options to load
+        await this.page.waitForSelector('input[name="shippingoption"]', { state: 'visible', timeout: 10000 });
         await this.shippingMethodContinue.waitFor({ state: "visible" });
         await this.shippingMethodContinue.click();
     }
 
     async selectPaymentMethod(paymentMethod: string) {
+        // Wait for payment method step to be active
+        await this.page.waitForSelector('li#opc-payment_method.active', { state: 'visible', timeout: 15000 });
+        // Wait for payment methods to load
+        await this.page.waitForSelector('input[name="paymentmethod"]', { state: 'visible', timeout: 10000 });
         await this.paymentMethodContinue.waitFor({ state: "visible" });
         await this.paymentMethodContinue.click();
     }
 
     async selectPaymentInfo(paymentInfo: string) {
+        // Wait for payment info step to be active
+        await this.page.waitForSelector('li#opc-payment_info.active', { state: 'visible', timeout: 15000 });
+        // Wait for payment info form load
+        await this.page.waitForSelector('#checkout-payment-info-load', { state: 'visible', timeout: 10000 });
         await this.paymentInfoContinue.waitFor({ state: "visible" });
         await this.paymentInfoContinue.click();
     }
 
     async confirmOrder() {
+        // Wait for confirm order step to be active
+        await this.page.waitForSelector('li#opc-confirm_order.active', { state: 'visible', timeout: 15000 });
         await this.confirmOrderButton.waitFor({ state: "visible" });
         await this.confirmOrderButton.click();
     }
 
     async getOrderConfirmTitle() {
-        await this.orderConfirmTitle.waitFor({ state: "visible" });
+        // Wait for confirm order please-wait loader to hide
+        await this.page.locator("#confirm-order-please-wait").waitFor({ state: "hidden", timeout: 15000 });
+        await this.orderConfirmTitle.waitFor({ state: "visible", timeout: 15000 });
         return await this.orderConfirmTitle.textContent();
     }
 

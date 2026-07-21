@@ -44,6 +44,7 @@ export class CartPage {
     async gotoShoppingCart() {
         await this.shoppingCartLink.click();
         await this.page.waitForURL("**/cart");
+        await this.page.waitForSelector('.order-summary-content', { state: 'visible', timeout: 10000 });
     }
 
     async clearCart() {
@@ -58,6 +59,7 @@ export class CartPage {
                 await removeCheckboxes.nth(i).check();
             }
             await this.updateCartButton.click();
+            await this.emptyCartMessage.waitFor({ state: "visible" });
         }
     }
 

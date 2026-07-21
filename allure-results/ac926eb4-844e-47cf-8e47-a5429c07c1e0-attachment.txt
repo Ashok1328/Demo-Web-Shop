@@ -1,0 +1,5 @@
+Order Totals:
+- Sub-Total: 10.00
+- Shipping: 0.00
+- Tax: 0.00
+- Total: 10.00
